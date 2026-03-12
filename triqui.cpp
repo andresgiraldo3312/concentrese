@@ -1,5 +1,7 @@
  
 #include <iostream>
+#include <fstream>
+#include <cstring>
 
 using namespace std;
 
@@ -7,6 +9,7 @@ class Tablero{
     
     private:
         char core[3][3];
+        //int vidas;
     
     public:
         Tablero(char x);
@@ -78,9 +81,12 @@ void Jugador::ponerFicha(Tablero* T, int fila, int columna){
 
 int main(){
     
+    /*
     Tablero MiTablero('-');
     
-    MiTablero.Mostrar();
+    
+    
+    //MiTablero.Mostrar();
     
     cout << endl;
     
@@ -91,11 +97,29 @@ int main(){
     
     JugadorInicial.ponerFicha(&MiTablero,1,1);
     
-    MiTablero.Mostrar();
+    //MiTablero.Mostrar();
     
     otroJugador.ponerFicha(&MiTablero,1,2);
     
     MiTablero.Mostrar();
+    
+    
+    ofstream archivo("file.tri", ios::binary);
+    
+    char Buffer[sizeof(Tablero)];
+    memcpy(Buffer, &MiTablero, sizeof(Tablero));
+    
+    archivo.write(Buffer,sizeof(Tablero));
+    archivo.close();
+    */
+    
+    ifstream archivoLectura("file.tri", ios::binary);
+    
+    Tablero OtroTablero('-');
+    
+    archivoLectura.read((char *)&OtroTablero,sizeof(Tablero));
+    
+    OtroTablero.Mostrar();
 
     return 0;
 }
